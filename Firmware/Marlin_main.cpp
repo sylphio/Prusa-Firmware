@@ -5859,8 +5859,8 @@ Sigma_Exit:
         {
           #ifdef FILAMENTCHANGE_ZADD
             target[Z_AXIS]+= FILAMENTCHANGE_ZADD ;
-            if(target[Z_AXIS] < 10){
-              target[Z_AXIS]+= 10 ;
+            if(target[Z_AXIS] < 20){
+              target[Z_AXIS]+= 20 ;
               TooLowZ = 1;
             }else{
               TooLowZ = 0;
@@ -5990,6 +5990,14 @@ Sigma_Exit:
 			lcd_display_message_fullscreen_P(MSG_UNLOADING_FILAMENT);
 			KEEPALIVE_STATE(IN_HANDLER);
 			custom_message = true;
+			
+            //@begin sl2 : Added extraction before change           
+			lcd_setstatuspgm(MSG_UNLOADING_FILAMENT_EXTRACT);
+            target[E_AXIS] += FILAMENTCHANGE_EXTRUDEBEFORECHANGE;
+            plan_buffer_line(target[X_AXIS], target[Y_AXIS], target[Z_AXIS], target[E_AXIS], FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED, active_extruder);
+            st_synchronize();
+            //@end sl2 : Added extraction before change   
+
 			lcd_setstatuspgm(MSG_UNLOADING_FILAMENT);
 
 			if (code_seen('L'))
@@ -6602,6 +6610,14 @@ Sigma_Exit:
 #endif //PAT9125
 		custom_message = true;
 		custom_message_type = 2;
+		
+        //@begin sl2 : Added extraction before change           
+		lcd_setstatuspgm(MSG_UNLOADING_FILAMENT_EXTRACT); 
+        current_position[E_AXIS] += FILAMENTCHANGE_EXTRUDEBEFORECHANGE;
+        plan_buffer_line(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS], FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED, active_extruder);        
+        st_synchronize();
+        //@end sl2 : Added extraction before change   
+
 		lcd_setstatuspgm(MSG_UNLOADING_FILAMENT); 
 
 //		extr_unload2();
