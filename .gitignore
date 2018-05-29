@@ -1,1 +1,3 @@
 Firmware/Configuration_prusa.h
+Build.bat
+build.options.json
