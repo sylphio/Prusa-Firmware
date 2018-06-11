@@ -5991,12 +5991,12 @@ Sigma_Exit:
 			KEEPALIVE_STATE(IN_HANDLER);
 			custom_message = true;
 			
-            //@begin sl2 : Added extraction before change           
+      //@begin sl2 : Added extraction before change           
 			lcd_setstatuspgm(MSG_UNLOADING_FILAMENT_EXTRACT);
-            target[E_AXIS] += FILAMENTCHANGE_EXTRUDEBEFORECHANGE;
-            plan_buffer_line(target[X_AXIS], target[Y_AXIS], target[Z_AXIS], target[E_AXIS], FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED, active_extruder);
-            st_synchronize();
-            //@end sl2 : Added extraction before change   
+      target[E_AXIS] += FILAMENTCHANGE_EXTRUDEBEFORECHANGE;
+      plan_buffer_line(target[X_AXIS], target[Y_AXIS], target[Z_AXIS], target[E_AXIS], FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED, active_extruder);
+      st_synchronize();
+      //@end sl2 : Added extraction before change   
 
 			lcd_setstatuspgm(MSG_UNLOADING_FILAMENT);
 

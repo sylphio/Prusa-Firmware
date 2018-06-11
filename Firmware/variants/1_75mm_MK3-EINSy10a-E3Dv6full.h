@@ -349,7 +349,7 @@ const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 
 //@begin sl2 : Added extraction before change           
 #define FILAMENTCHANGE_EXTRUDEBEFORECHANGE 20
-#define FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED 10
+#define FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED 2
 //@end sl2 : Added extraction before change           
   
 #endif
