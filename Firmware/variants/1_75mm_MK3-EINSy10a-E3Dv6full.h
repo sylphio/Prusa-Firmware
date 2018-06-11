@@ -348,8 +348,8 @@ const bool Z_MIN_ENDSTOP_INVERTING = false; // set to true to invert the logic o
 #define FILAMENTCHANGE_ZFEED 15
 
 //@begin sl2 : Added extraction before change           
-define FILAMENTCHANGE_EXTRUDEBEFORECHANGE 20
-define FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED 10
+#define FILAMENTCHANGE_EXTRUDEBEFORECHANGE 20
+#define FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED 10
 //@end sl2 : Added extraction before change           
   
 #endif
@@ -499,12 +499,18 @@ define FILAMENTCHANGE_EXTRUDEBEFORECHANGE_EFEED 10
 #define PP_PREHEAT_HPB_TEMP 100
 #define PP_PREHEAT_FAN_SPEED 0
 
-#define PET_PREHEAT_HOTEND_TEMP 230
+#define PET_PREHEAT_HOTEND_TEMP 240
 #define PET_PREHEAT_HPB_TEMP 85
 #define PET_PREHEAT_FAN_SPEED 0
 
-#define FLEX_PREHEAT_HOTEND_TEMP 240
-#define FLEX_PREHEAT_HPB_TEMP 50
+//@begin sl2 : Added extraction before change
+#define HTPET_PREHEAT_HOTEND_TEMP 270
+#define HTPET_PREHEAT_HPB_TEMP 105
+#define HTPET_PREHEAT_FAN_SPEED 0
+//@end sl2 : Added extraction before change   
+
+#define FLEX_PREHEAT_HOTEND_TEMP 260
+#define FLEX_PREHEAT_HPB_TEMP 85
 #define FLEX_PREHEAT_FAN_SPEED 0
 
 /*------------------------------------

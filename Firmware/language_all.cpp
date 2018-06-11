@@ -2532,6 +2532,15 @@ const char * const MSG_XYZ_DETAILS_LANG_TABLE[LANG_NUM] PROGMEM = {
 	MSG_XYZ_DETAILS_CZ
 };
 
+const char MSG_PREHEAT_BED_EN[] PROGMEM = "Do you need to prehead the bed?";
+const char MSG_PREHEAT_BED_CZ[] PROGMEM = "Do you need to prehead the bed?";
+const char * const MSG_PREHEAT_BED_LANG_TABLE[LANG_NUM] PROGMEM = {
+	MSG_PREHEAT_BED_EN,
+	MSG_PREHEAT_BED_CZ
+};
+
+
+
 const char MSG_X_MAX_EN[] PROGMEM = "x_max: ";
 const char * const MSG_X_MAX_LANG_TABLE[1] PROGMEM = {
 	MSG_X_MAX_EN

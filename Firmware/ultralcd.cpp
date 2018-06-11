@@ -1454,58 +1454,58 @@ void lcd_preheat_farm_nozzle()
 	setWatch(); // heater sanity check timer
 }
 
+void lcd_preheat_base(const float& hotend, const float& bed)
+{
+	int8_t heatbed = false;
+	setTargetHotend0(hotend);
+	fanSpeed = 0;
+	heatbed = lcd_show_fullscreen_message_yes_no_and_wait_P(MSG_PREHEAT_BED, false, false);  //allow_timeouting = true, bool default_yes = false
+	if (heatbed)
+	{
+		setTargetBed(bed);
+	} 
+	else
+	{
+		setTargetBed(0);
+	}   		
+  lcd_update_enable(true);
+	lcd_return_to_status();
+	setWatch(); // heater sanity check timer
+}
+
 void lcd_preheat_pla()
 {
-  setTargetHotend0(PLA_PREHEAT_HOTEND_TEMP);
-  setTargetBed(PLA_PREHEAT_HPB_TEMP);
-  fanSpeed = 0;
-  lcd_return_to_status();
-  setWatch(); // heater sanity check timer
+  lcd_preheat_base(PLA_PREHEAT_HOTEND_TEMP,PLA_PREHEAT_HPB_TEMP);
 }
 
 void lcd_preheat_abs()
 {
-  setTargetHotend0(ABS_PREHEAT_HOTEND_TEMP);
-  setTargetBed(ABS_PREHEAT_HPB_TEMP);
-  fanSpeed = 0;
-  lcd_return_to_status();
-  setWatch(); // heater sanity check timer
+  lcd_preheat_base(ABS_PREHEAT_HOTEND_TEMP,ABS_PREHEAT_HPB_TEMP);
 }
 
 void lcd_preheat_pp()
 {
-  setTargetHotend0(PP_PREHEAT_HOTEND_TEMP);
-  setTargetBed(PP_PREHEAT_HPB_TEMP);
-  fanSpeed = 0;
-  lcd_return_to_status();
-  setWatch(); // heater sanity check timer
+  lcd_preheat_base(PP_PREHEAT_HOTEND_TEMP,PP_PREHEAT_HPB_TEMP);
 }
 
 void lcd_preheat_pet()
 {
-  setTargetHotend0(PET_PREHEAT_HOTEND_TEMP);
-  setTargetBed(PET_PREHEAT_HPB_TEMP);
-  fanSpeed = 0;
-  lcd_return_to_status();
-  setWatch(); // heater sanity check timer
+  lcd_preheat_base(PET_PREHEAT_HOTEND_TEMP,PET_PREHEAT_HPB_TEMP);
+}
+
+void lcd_preheat_htpet()
+{
+  lcd_preheat_base(HTPET_PREHEAT_HOTEND_TEMP,HTPET_PREHEAT_HPB_TEMP);
 }
 
 void lcd_preheat_hips()
 {
-  setTargetHotend0(HIPS_PREHEAT_HOTEND_TEMP);
-  setTargetBed(HIPS_PREHEAT_HPB_TEMP);
-  fanSpeed = 0;
-  lcd_return_to_status();
-  setWatch(); // heater sanity check timer
+  lcd_preheat_base(HIPS_PREHEAT_HOTEND_TEMP,HIPS_PREHEAT_HPB_TEMP);
 }
 
 void lcd_preheat_flex()
 {
-  setTargetHotend0(FLEX_PREHEAT_HOTEND_TEMP);
-  setTargetBed(FLEX_PREHEAT_HPB_TEMP);
-  fanSpeed = 0;
-  lcd_return_to_status();
-  setWatch(); // heater sanity check timer
+  lcd_preheat_base(FLEX_PREHEAT_HOTEND_TEMP,FLEX_PREHEAT_HPB_TEMP);
 }
 
 
@@ -1767,14 +1767,16 @@ static void lcd_preheat_menu()
 	  MENU_ITEM(function, PSTR("nozzle -  " STRINGIFY(FARM_PREHEAT_HOTEND_TEMP) "/0"), lcd_preheat_farm_nozzle);
 	  MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
 	  MENU_ITEM(function, PSTR("ABS    -  " STRINGIFY(ABS_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(ABS_PREHEAT_HPB_TEMP)), lcd_preheat_abs);
-  } else {
-	  MENU_ITEM(function, PSTR("PLA  -  " STRINGIFY(PLA_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PLA_PREHEAT_HPB_TEMP)), lcd_preheat_pla);
-	  MENU_ITEM(function, PSTR("PET  -  " STRINGIFY(PET_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PET_PREHEAT_HPB_TEMP)), lcd_preheat_pet);
-	  MENU_ITEM(function, PSTR("ABS  -  " STRINGIFY(ABS_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(ABS_PREHEAT_HPB_TEMP)), lcd_preheat_abs);
-	  MENU_ITEM(function, PSTR("HIPS -  " STRINGIFY(HIPS_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(HIPS_PREHEAT_HPB_TEMP)), lcd_preheat_hips);
-	  MENU_ITEM(function, PSTR("PP   -  " STRINGIFY(PP_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PP_PREHEAT_HPB_TEMP)), lcd_preheat_pp);
-	  MENU_ITEM(function, PSTR("FLEX -  " STRINGIFY(FLEX_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(FLEX_PREHEAT_HPB_TEMP)), lcd_preheat_flex);
-	  MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
+  } else {    
+	  MENU_ITEM(function, PSTR("PLA    -  " STRINGIFY(PLA_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PLA_PREHEAT_HPB_TEMP)), lcd_preheat_pla);    	                                                                                                                            
+    MENU_ITEM(function, PSTR("PET    -  " STRINGIFY(PET_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PET_PREHEAT_HPB_TEMP)), lcd_preheat_pet);
+    MENU_ITEM(function, PSTR("HT PET -  " STRINGIFY(HTPET_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(HTPET_PREHEAT_HPB_TEMP)), lcd_preheat_htpet);        
+    MENU_ITEM(function, MSG_COOLDOWN, lcd_cooldown);
+    MENU_ITEM(function, PSTR("FLEX   -  " STRINGIFY(FLEX_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(FLEX_PREHEAT_HPB_TEMP)), lcd_preheat_flex);
+	  MENU_ITEM(function, PSTR("ABS    -  " STRINGIFY(ABS_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(ABS_PREHEAT_HPB_TEMP)), lcd_preheat_abs);
+	  MENU_ITEM(function, PSTR("HIPS   -  " STRINGIFY(HIPS_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(HIPS_PREHEAT_HPB_TEMP)), lcd_preheat_hips);
+	  MENU_ITEM(function, PSTR("PP     -  " STRINGIFY(PP_PREHEAT_HOTEND_TEMP) "/" STRINGIFY(PP_PREHEAT_HPB_TEMP)), lcd_preheat_pp);
+	  
   }
   
 
