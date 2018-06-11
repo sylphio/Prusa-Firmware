@@ -8,11 +8,11 @@
 
 // Firmware version
 #define FW_VERSION "3.2.1sl"
-#define FW_COMMIT_NR   576
+#define FW_COMMIT_NR   578
 // FW_VERSION_UNKNOWN means this is an unofficial build.
 // The firmware should only be checked into github with this symbol.
-#define FW_DEV_VERSION FW_VERSION_UNKNOWN
-#define FW_REPOSITORY "Unknown"
+#define FW_DEV_VERSION FW_VERSION_RC
+#define FW_REPOSITORY "MK3-Retraction"
 #define FW_VERSION_FULL FW_VERSION "-" STR(FW_COMMIT_NR)
 
 // Debug version has debugging enabled (the symbol DEBUG_BUILD is set).
